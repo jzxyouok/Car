@@ -1,4 +1,4 @@
-﻿{
+{
     
        "list":[
 	   {
@@ -61,9 +61,8 @@
 			"idn":4,
 			"image_list":null,
 			"type":3
-        }
-		],
-		"list":[
+        },
+		
 	   {
             "id":1,
 			"cover_image":"http://www.52zy.com/upload/2008/4/13/20084131432424587.jpg",
@@ -124,9 +123,9 @@
 			"idn":4,
 			"image_list":null,
 			"type":3
-        }
-		],
-		"list":[
+        },
+		
+		
 	   {
             "id":1,
 			"cover_image":"http://pic72.nipic.com/file/20150715/20763852_163009789000_2.jpg",
@@ -187,9 +186,8 @@
 			"idn":4,
 			"image_list":null,
 			"type":3
-        }
-		],
-		"list":[
+        },
+		
 	   {
             "id":1,
 			"cover_image":"http://img3.ddove.com/upload/20150119/190408472665.jpg",
