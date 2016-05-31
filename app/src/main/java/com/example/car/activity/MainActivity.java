@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.renderscript.Sampler;
+import android.support.design.BuildConfig;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,8 @@ import com.example.car.adapter.ZiXunAdapter;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.xutils.x;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -81,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        x.Ext.init(getApplication());
+        x.Ext.setDebug(BuildConfig.DEBUG);
     }
 
     @Override

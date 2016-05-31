@@ -1,34 +1,24 @@
-package com.example.car.zixunfragment;
+package com.example.car.zhaochefragment;
 
-import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.ThemedSpinnerAdapter;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.car.AsyncTask.YaoWenAsyncTask;
 import com.example.car.R;
-
-import org.xutils.x;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link YaoWenFragment.OnFragmentInteractionListener} interface
+ * {@link JingZhunFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link YaoWenFragment#newInstance} factory method to
+ * Use the {@link JingZhunFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class YaoWenFragment extends Fragment {
+public class JingZhunFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,7 +30,7 @@ public class YaoWenFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public YaoWenFragment() {
+    public JingZhunFragment() {
         // Required empty public constructor
     }
 
@@ -50,17 +40,16 @@ public class YaoWenFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment YaoWenFragment.
+     * @return A new instance of fragment JingZhunFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static YaoWenFragment newInstance(String param1, String param2) {
-        YaoWenFragment fragment = new YaoWenFragment();
+    public static JingZhunFragment newInstance(String param1, String param2) {
+        JingZhunFragment fragment = new JingZhunFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-
     }
 
     @Override
@@ -70,23 +59,13 @@ public class YaoWenFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-
-        YaoWenAsyncTask asyncTask=new YaoWenAsyncTask(getContext(),view);
-        asyncTask.execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_yao_wen, container, false);
+        return inflater.inflate(R.layout.fragment_jing_zhun, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -118,7 +97,7 @@ public class YaoWenFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

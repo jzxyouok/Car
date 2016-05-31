@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="selectColor">#FF4081</color>
     <color name="notselectcolor">#121111</color>
+    <color name="switchChoose">#030303</color>
+    <color name="switchNotChoose">#fac506</color>
 </resources>

@@ -3,12 +3,24 @@ package com.example.car.activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.car.R;
+import com.example.car.bean.Content;
+import com.example.car.zhaochefragment.JingZhunFragment;
+import com.example.car.zhaochefragment.PinPaiFragment;
+
+import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +30,7 @@ import com.example.car.R;
  * Use the {@link ZhaoCheFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ZhaoCheFragment extends Fragment {
+public class ZhaoCheFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +41,10 @@ public class ZhaoCheFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Fragment fragment;
+    private PinPaiFragment pinPaiFragment;
+    private LinearLayout mFragmentFindLLytSwitch;
+
 
     public ZhaoCheFragment() {
         // Required empty public constructor
@@ -59,6 +75,7 @@ public class ZhaoCheFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -73,6 +90,7 @@ public class ZhaoCheFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+
     }
 
 //    @Override
@@ -87,9 +105,63 @@ public class ZhaoCheFragment extends Fragment {
 //    }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        assignViews(view);
+    }
+
+    private TextView mFragmentFindTvBrand;
+    private TextView mFragmentFindTvFilter;
+    private ImageView mFragmentFindIvSearch;
+    private FrameLayout mFragmentFindFlytContent;
+
+    private void assignViews(View view) {
+        mFragmentFindLLytSwitch = (LinearLayout) view.findViewById(R.id.fragment_find_llyt_switch);
+        mFragmentFindTvBrand = (TextView) view.findViewById(R.id.fragment_find_tv_brand);
+        mFragmentFindTvFilter = (TextView) view.findViewById(R.id.fragment_find_tv_filter);
+        mFragmentFindIvSearch = (ImageView) view.findViewById(R.id.fragment_find_iv_search);
+        mFragmentFindFlytContent = (FrameLayout) view.findViewById(R.id.fragment_find_flyt_content);
+        mFragmentFindTvBrand.setOnClickListener(this);
+        mFragmentFindTvFilter.setOnClickListener(this);
+        pinPaiFragment = new PinPaiFragment();
+        setFragment(pinPaiFragment);
+
+    }
+
+
+    public void setFragment(Fragment fragment) {
+        this.fragment = fragment;
+        android.support.v4.app.FragmentManager manager = getFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_find_flyt_content, this.fragment);
+        transaction.commit();
+
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fragment_find_tv_brand:
+                mFragmentFindLLytSwitch.setBackgroundResource(R.drawable.fragment_find_ic_left);
+                        mFragmentFindTvBrand.setTextColor(getResources().getColor(R.color.switchChoose));
+                        mFragmentFindTvFilter.setTextColor(getResources().getColor(R.color.switchNotChoose));
+               PinPaiFragment pinPaiFragment=new PinPaiFragment();
+                setFragment(pinPaiFragment);
+                break;
+            case R.id.fragment_find_tv_filter:
+                mFragmentFindLLytSwitch.setBackgroundResource(R.drawable.fragment_find_ic_right);
+                mFragmentFindTvBrand.setTextColor(getResources().getColor(R.color.switchNotChoose));
+                mFragmentFindTvFilter.setTextColor(getResources().getColor(R.color.switchChoose));
+                JingZhunFragment jingZhunFragment = new JingZhunFragment();
+                setFragment(jingZhunFragment);
+                break;
+        }
     }
 
     /**

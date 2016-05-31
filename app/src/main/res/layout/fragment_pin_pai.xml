@@ -2,22 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-
-    tools:context="com.example.car.zixunfragment.YaoWenFragment"
+    tools:context="com.example.car.zhaochefragment.PinPaiFragment"
     android:orientation="vertical">
 
-
     <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/yaowen_list"
+
+    <com.example.car.view.PinnedHeaderListView
+        android:id="@+id/pin_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
 
-
-
-
-
-
+    </com.example.car.view.PinnedHeaderListView>
 
 </LinearLayout>
