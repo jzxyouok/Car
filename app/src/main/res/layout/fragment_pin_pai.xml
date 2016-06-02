@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.car.zhaochefragment.PinPaiFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.car.zhaochefragment.PinPaiFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,11 +13,57 @@
         android:layout_height="match_parent">
 
     </com.example.car.view.PinnedHeaderListView>
+
     <com.example.car.view.SideBar
         android:id="@+id/find_brand_sb"
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/find_brand_llyt_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="80dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/left_shadow" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝马" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝马" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝马" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝马" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </FrameLayout>

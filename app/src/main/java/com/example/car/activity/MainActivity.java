@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private FragmentOnTouchListener fragmentOnTouchListener;
 
 
     @Override
@@ -177,6 +179,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    //如果触摸就会触发
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev)
+    {
+        if (fragmentOnTouchListener != null)
+        {
+            fragmentOnTouchListener.onTouch(ev);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    public interface FragmentOnTouchListener
+    {
+        public boolean onTouch(MotionEvent ev);
+    }
+
+    public void registerFragmentOnTouchListener(FragmentOnTouchListener fragmentOnTouchListener)
+    {
+        this.fragmentOnTouchListener = fragmentOnTouchListener;
+    }
+
+    public void unregisterMyOnTouchListener(FragmentOnTouchListener myOnTouchListener)
+    {
+        this.fragmentOnTouchListener = null;
+    }
+
     public void onclickswitch(int choose) {
 
         switch (choose) {
@@ -252,16 +280,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
-        outState.putBoolean("isrecycler",true);
-        outState.putInt("choose",choose);
+        outState.putBoolean("isrecycler", true);
+        outState.putInt("choose", choose);
     }
 
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        isrecycler= savedInstanceState.getBoolean("isrecycler");
-        choose= savedInstanceState.getInt("choose");
+        isrecycler = savedInstanceState.getBoolean("isrecycler");
+        choose = savedInstanceState.getInt("choose");
     }
 
     @Override
@@ -272,15 +300,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-private long firstTime = 0;
+
+    private long firstTime = 0;
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        long secondTime=System.currentTimeMillis();
-        if (secondTime-firstTime>1000){
-            Toast.makeText(this,"再按一次弹出客户端",Toast.LENGTH_LONG).show();
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime > 1000) {
+            Toast.makeText(this, "再按一次弹出客户端", Toast.LENGTH_LONG).show();
             firstTime = secondTime;
-        }else {
+        } else {
             finish();
         }
     }

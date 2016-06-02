@@ -1,18 +1,26 @@
 package com.example.car.zhaochefragment;
 
 import android.content.Context;
+import android.gesture.GestureOverlayView;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.car.R;
+import com.example.car.activity.MainActivity;
 import com.example.car.adapter.PinYinAdapter;
 import com.example.car.bean.Content;
 import com.example.car.view.PinnedHeaderListView;
@@ -30,7 +38,7 @@ import java.util.Comparator;
  * Use the {@link PinPaiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PinPaiFragment extends Fragment {
+public class PinPaiFragment extends Fragment implements MainActivity.FragmentOnTouchListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,6 +51,8 @@ public class PinPaiFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ArrayList<Content> dataList;
     private PinnedHeaderListView pinListView;
+    private GestureDetector gestureDetector;
+    private LinearLayout ll;
 
     public PinPaiFragment() {
         // Required empty public constructor
@@ -104,7 +114,8 @@ public class PinPaiFragment extends Fragment {
                 return lhs.getLetter().compareTo(rhs.getLetter());
             }
         });
-
+        ((MainActivity)getActivity()).registerFragmentOnTouchListener(this);
+gestureDetector=new GestureDetector(getContext(), onGestureListener);
     }
     private WindowManager windowManager;
     // 提示对话框
@@ -133,6 +144,14 @@ public class PinPaiFragment extends Fragment {
         sideBar.setVisibility(View.VISIBLE);
         sideBar.setTextView(dialogText);
         sideBar.setListView(pinListView);
+        ll = (LinearLayout) view.findViewById(R.id.find_brand_llyt_content);
+        pinListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ll.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.in_from_right));
+                ll.setVisibility(View.VISIBLE);
+            }
+        });
 
 
 
@@ -155,6 +174,33 @@ public class PinPaiFragment extends Fragment {
         }
 
     }
+    private GestureDetector.OnGestureListener onGestureListener = new GestureDetector.SimpleOnGestureListener()
+    {
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+        {
+            // 手势滑动时失去焦点
+            ll.setPressed(false);
+            ll.setFocusable(false);
+            ll.setFocusableInTouchMode(false);
+
+            return super.onScroll(e1, e2, distanceX, distanceY);
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            float x = e2.getX() - e1.getX();
+
+            // 向右滑动到一定距离时隐藏内容
+            if (x > 100)
+            {
+                ll.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.out_to_right));
+                ll.setVisibility(View.GONE);
+            }
+            return true;
+        }
+    };
 
 
 //    @Override
@@ -172,6 +218,11 @@ public class PinPaiFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public boolean onTouch(MotionEvent ev) {
+        return gestureDetector.onTouchEvent(ev);
     }
 
     /**
