@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.example.car.R;
@@ -23,7 +24,7 @@ import java.util.Locale;
 /**
  * Created by 11355 on 2016/5/30.
  */
-public class PinYinAdapter extends BaseAdapter implements PinnedHeaderListView.PinnedHeaderAdapter,AbsListView.OnScrollListener {
+public class PinYinAdapter extends BaseAdapter implements SectionIndexer,PinnedHeaderListView.PinnedHeaderAdapter,AbsListView.OnScrollListener {
 
 
     private  View view;
@@ -37,6 +38,12 @@ public class PinYinAdapter extends BaseAdapter implements PinnedHeaderListView.P
         this.view=view;
 
     }
+
+    @Override
+    public Object[] getSections() {
+        return new Object[0];
+    }
+
     /**
      * 返回当前首字母出现的第一个位置
      */

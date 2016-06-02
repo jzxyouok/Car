@@ -7,4 +7,5 @@
     <color name="notselectcolor">#121111</color>
     <color name="switchChoose">#030303</color>
     <color name="switchNotChoose">#fac506</color>
+    <color name="sidebar_cl">#1e1e1e</color>
 </resources>

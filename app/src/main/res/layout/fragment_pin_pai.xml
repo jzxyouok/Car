@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,5 +13,11 @@
         android:layout_height="match_parent">
 
     </com.example.car.view.PinnedHeaderListView>
+    <com.example.car.view.SideBar
+        android:id="@+id/find_brand_sb"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:visibility="visible" />
 
-</LinearLayout>
+</FrameLayout>

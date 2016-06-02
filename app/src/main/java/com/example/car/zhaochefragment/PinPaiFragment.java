@@ -1,6 +1,7 @@
 package com.example.car.zhaochefragment;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,11 +9,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.car.R;
 import com.example.car.adapter.PinYinAdapter;
 import com.example.car.bean.Content;
 import com.example.car.view.PinnedHeaderListView;
+import com.example.car.view.SideBar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -102,15 +106,39 @@ public class PinPaiFragment extends Fragment {
         });
 
     }
-
+    private WindowManager windowManager;
+    // 提示对话框
+    private TextView dialogText;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         pinListView = (PinnedHeaderListView) view.findViewById(R.id.pin_listview);
+
         PinYinAdapter adapter=new PinYinAdapter(getContext(),view,dataList);
         pinListView.setAdapter(adapter);
         pinListView.setOnScrollListener(adapter);
         pinListView.setPinnedHeaderView(LayoutInflater.from(getContext()).inflate(R.layout.listview__head_pinpai,pinListView,false));
+// 初始化提示对话框
+        dialogText = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.fragment_find_brand_listview_remind, null);
+        dialogText.setVisibility(View.INVISIBLE);
+        // 初始化窗口管理器
+        windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_APPLICATION, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        // 将提示对话框添加到窗口中
+        windowManager.addView(dialogText, lp);
+
+//侧边列表
+
+        SideBar sideBar = (SideBar) view.findViewById(R.id.find_brand_sb);
+        sideBar.setVisibility(View.VISIBLE);
+        sideBar.setTextView(dialogText);
+        sideBar.setListView(pinListView);
+
+
+
+
+
+
     }
 
     @Override
