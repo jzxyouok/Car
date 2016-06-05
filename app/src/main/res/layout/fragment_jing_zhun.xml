@@ -1,13 +1,35 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.car.zhaochefragment.JingZhunFragment">
+    android:orientation="vertical"
+    tools:context="com.example.car.zhaochefragment.JingZhunFragment"
+    >
+
+
+
+
+        <LinearLayout
+            android:id="@+id/find_filter_llyt_choosed"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_JZ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_JZ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v4.view.ViewPager>
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="精准" />
 
-</FrameLayout>
+</LinearLayout>

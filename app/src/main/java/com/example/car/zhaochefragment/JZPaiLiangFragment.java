@@ -1,31 +1,24 @@
-package com.example.car.activity;
+package com.example.car.zhaochefragment;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import com.example.car.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link WenDaFragment.OnFragmentInteractionListener} interface
+ * {@link JZPaiLiangFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link WenDaFragment#newInstance} factory method to
+ * Use the {@link JZPaiLiangFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WenDaFragment extends Fragment {
+public class JZPaiLiangFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,10 +29,8 @@ public class WenDaFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private ImageView img;
-    private Button bt;
 
-    public WenDaFragment() {
+    public JZPaiLiangFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +40,11 @@ public class WenDaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WenDaFragment.
+     * @return A new instance of fragment JZPaiLiangFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WenDaFragment newInstance(String param1, String param2) {
-        WenDaFragment fragment = new WenDaFragment();
+    public static JZPaiLiangFragment newInstance(String param1, String param2) {
+        JZPaiLiangFragment fragment = new JZPaiLiangFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,7 +65,7 @@ public class WenDaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wen_da, container, false);
+        return inflater.inflate(R.layout.fragment_jzpai_liang, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -84,17 +75,6 @@ public class WenDaFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-        img = (ImageView) view.findViewById(R.id.img_WD);
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
-
-        bt = (Button) view.findViewById(R.id.bt_WD);
-        imageLoader.displayImage("http://img2.imgtn.bdimg.com/it/u=3323249715,914891285&fm=21&gp=0.jpg",img);
-        super.onViewCreated(view, savedInstanceState);
-    }
 //    @Override
 //    public void onAttach(Context context) {
 //        super.onAttach(context);

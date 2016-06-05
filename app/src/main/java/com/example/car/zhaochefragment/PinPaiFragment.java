@@ -1,13 +1,16 @@
 package com.example.car.zhaochefragment;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.gesture.GestureOverlayView;
 import android.graphics.PixelFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.DragEvent;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,7 +41,7 @@ import java.util.Comparator;
  * Use the {@link PinPaiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PinPaiFragment extends Fragment implements MainActivity.FragmentOnTouchListener{
+public class PinPaiFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -53,6 +56,7 @@ public class PinPaiFragment extends Fragment implements MainActivity.FragmentOnT
     private PinnedHeaderListView pinListView;
     private GestureDetector gestureDetector;
     private LinearLayout ll;
+    private LinearLayout linearLayout;
 
     public PinPaiFragment() {
         // Required empty public constructor
@@ -114,14 +118,26 @@ public class PinPaiFragment extends Fragment implements MainActivity.FragmentOnT
                 return lhs.getLetter().compareTo(rhs.getLetter());
             }
         });
-        ((MainActivity)getActivity()).registerFragmentOnTouchListener(this);
+//        ((MainActivity)getActivity()).registerFragmentOnTouchListener(this);
 gestureDetector=new GestureDetector(getContext(), onGestureListener);
     }
     private WindowManager windowManager;
     // 提示对话框
     private TextView dialogText;
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ll = (LinearLayout) view.findViewById(R.id.find_brand_llyt_content);
+ll.setOnTouchListener(new View.OnTouchListener() {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        return gestureDetector.onTouchEvent(event);
+    }
+});
+
+        linearLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
+
 
         pinListView = (PinnedHeaderListView) view.findViewById(R.id.pin_listview);
 
@@ -144,7 +160,8 @@ gestureDetector=new GestureDetector(getContext(), onGestureListener);
         sideBar.setVisibility(View.VISIBLE);
         sideBar.setTextView(dialogText);
         sideBar.setListView(pinListView);
-        ll = (LinearLayout) view.findViewById(R.id.find_brand_llyt_content);
+
+
         pinListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -174,15 +191,16 @@ gestureDetector=new GestureDetector(getContext(), onGestureListener);
         }
 
     }
+
     private GestureDetector.OnGestureListener onGestureListener = new GestureDetector.SimpleOnGestureListener()
     {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
         {
             // 手势滑动时失去焦点
-            ll.setPressed(false);
-            ll.setFocusable(false);
-            ll.setFocusableInTouchMode(false);
+            linearLayout.setPressed(false);
+            linearLayout.setFocusable(false);
+            linearLayout.setFocusableInTouchMode(false);
 
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
@@ -220,10 +238,6 @@ gestureDetector=new GestureDetector(getContext(), onGestureListener);
         mListener = null;
     }
 
-    @Override
-    public boolean onTouch(MotionEvent ev) {
-        return gestureDetector.onTouchEvent(ev);
-    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -239,4 +253,10 @@ gestureDetector=new GestureDetector(getContext(), onGestureListener);
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+//    @Override
+//    public void onPause() {
+//        ((MainActivity)getActivity()).unregisterMyOnTouchListener(this);
+//        super.onPause();
+//    }
 }

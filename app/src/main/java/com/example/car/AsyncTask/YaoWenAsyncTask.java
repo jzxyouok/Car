@@ -61,6 +61,7 @@ private boolean isStop=false;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
    private View footView ;
+    private View inflate;
 
 
     public YaoWenAsyncTask(Context context, View view) {
@@ -168,7 +169,7 @@ private boolean isStop=false;
         //  ImageLoaderConfiguration.createDefault(this);
         // method.
         // imageLoader初始化
-        //imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+      //  imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
@@ -210,7 +211,7 @@ private boolean isStop=false;
         onloading();
         System.out.println(data.size());
         yaowenlist = (ListView) view.findViewById(R.id.yaowen_list);
-        View inflate = LayoutInflater.from(context).inflate(R.layout.photo_viewpage, null);
+        inflate = LayoutInflater.from(context).inflate(R.layout.photo_viewpage, null);
 
         yaowenlist.addHeaderView(inflate);
         yaowenlist.setAdapter(new BaseAdapter() {

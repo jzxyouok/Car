@@ -3,12 +3,20 @@ package com.example.car.zhaochefragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 
 import com.example.car.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +37,7 @@ public class JingZhunFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
 
     public JingZhunFragment() {
         // Required empty public constructor
@@ -61,11 +70,60 @@ public class JingZhunFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_jing_zhun, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        assignViews(view);
+        final String[] tabData = new String[]{"价格", "级别", "排量", "变速箱"};
+        mVpJZ.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                switch (position) {
+                    case 0:
+                        return new JZJiageFragment();
+                    case 1:
+                        return new JZJibieFragment();
+
+                    case 2:
+                        return new JZPaiLiangFragment();
+
+                    case 3:
+                        return new JZBianSuXiangFragment();
+                    default:
+                        break;
+                }
+                return new JZPaiLiangFragment();
+            }
+
+            @Override
+            public int getCount() {
+                return tabData.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return tabData[position];
+            }
+        });
+        mTabJZ.setupWithViewPager(mVpJZ);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private TabLayout mTabJZ;
+    private ViewPager mVpJZ;
+
+    private void assignViews(View view) {
+
+        mTabJZ = (TabLayout) view.findViewById(R.id.tab_JZ);
+        mVpJZ = (ViewPager) view.findViewById(R.id.vp_JZ);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -97,7 +155,7 @@ public class JingZhunFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

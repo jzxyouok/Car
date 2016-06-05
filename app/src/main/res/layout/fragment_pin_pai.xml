@@ -28,7 +28,8 @@
         android:layout_marginLeft="80dp"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:clickable="true">
 
         <TextView
             android:layout_width="2dp"
@@ -36,10 +37,12 @@
             android:background="@drawable/left_shadow" />
 
         <LinearLayout
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
