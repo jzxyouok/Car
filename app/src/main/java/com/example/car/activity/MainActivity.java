@@ -43,6 +43,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.sharesdk.framework.ShareSDK;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -88,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         x.Ext.init(getApplication());
         x.Ext.setDebug(BuildConfig.DEBUG);
+
+        //初始化shareSDK
+
     }
 
     @Override
